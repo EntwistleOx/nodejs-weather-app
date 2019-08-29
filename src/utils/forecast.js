@@ -8,14 +8,13 @@ const forecast = (latitude, longitude, callback) => {
         }else {
             try {
                 callback(undefined, 
-                    body.daily.data[0].summary + 
-                    ' It is currently ' + body.currently.temperature + '° degrees out.' + 
-                    ' The is a ' + body.currently.precipProbability + '% chance of rain.'
-                    // {
-                    //     temperature: response.body.currently.temperature,
-                    //     precipProbability: response.body.currently.precipProbability,
-                    //     forecast: response.body.daily.data[0].summary
-                    // }
+                    {
+                        forecast: body.daily.data[0].summary + 
+                        ' It is currently ' + body.currently.temperature + '° degrees out.' + 
+                        ' The hight today is ' + body.daily.data[0].temperatureMax + '° with a low of ' + body.daily.data[0].temperatureMin + 
+                        '°. There is '+ body.currently.humidity + '% of humidity with a ' + body.currently.precipProbability + '% chance of rain.',
+                        icon: body.currently.icon
+                    }
                 )
             } catch (error) {
                 callback(body.error, undefined)
